@@ -1,30 +1,34 @@
-let currentTimer, lastMin, lastSecond, status, defaultSession = 25, defaultBreak = 5;
-
+let currentTimer, lastMin, lastSecond, status, defaultSession = 25, defaultBreak = 5, activeTimer = false;
+let seconds = 60, timerStarted = false;
 window.onload = () => {
     //timer(25);
     initDisplays();
     initBtns();
 }
 
-function timer(amount, min = amount, seconds = 60) {
+function timer() {
+    activeTimer = true;
     currentTimer = setInterval(() => {
         if (seconds == 0) {
-            min -= 1;
+            defaultSession -= 1;
             seconds = 59;
+            time.textContent = `${pad(defaultSession)}:${pad(seconds)}`
         }
         else {
             seconds -= 1
+            time.textContent = `${pad(defaultSession)}:${pad(seconds)}`
         }
 
-        console.log(`${min} ${seconds}`);
+
     }, 1000);
 }
 
 
 function pauseTimer(){
-    clearInterval(current);
-    lastMin = min;
+    clearInterval(currentTimer);
+    lastMin = defaultSession;
     lastSecond = seconds;
+    timerStarted =false;
 };
 
 function stopTimer(){
@@ -44,22 +48,26 @@ function initBtns(){
     //init reduce session time button
     subSession = document.querySelector('#subSession');
     subSession.addEventListener('click',()=> {
-        if(defaultSession == 0){
+        if(defaultSession == 0 || activeTimer){
             return
         }
+
         defaultSession -= 1;
         updateSession(defaultSession);
     })
     //init increase session time button
     addsession = document.querySelector('#addSession');
     addSession.addEventListener('click',()=> {
+        if(activeTimer){
+            return
+        }
         defaultSession += 1;
         updateSession(defaultSession);
     })
     //init reduce break button
     subBreak = document.querySelector('#subBreak');
     subBreak.addEventListener('click',()=> {
-        if(defaultBreak == 0){
+        if(defaultBreak == 0 || activeTimer){
             return
         }
         defaultBreak -= 1;
@@ -68,7 +76,7 @@ function initBtns(){
     //init increase break button
     addBreak = document.querySelector('#addBreak');
     addBreak.addEventListener('click',()=> {
-        if(defaultBreak == 0){
+        if(activeTimer){
             return
         }
         defaultBreak += 1;
@@ -76,12 +84,46 @@ function initBtns(){
     })
 
     //init Start button
+    start = document.querySelector('#start');
+    start.addEventListener('click',()=>{
+        if(!timerStarted){
+            timer();
+        }
+    })
     
-    
+    //init pause button
+    pause = document.querySelector('#pause');
+    pause.addEventListener('click',()=>{
+        pauseTimer();
+    })
+
+    //init refresh button
+    refresh = document.querySelector('#refresh');
+    refresh.addEventListener('click',()=>{
+        clearInterval(currentTimer);
+        defaultBreak = 5;
+        defaultSession = 25;
+        time.textContent = '25:00'
+        breakMins.textContent = 25;
+        sessionMins.textContent = 5
+        activeTimer = false;
+    })
+    //init StopClock
+    stopClock = document.querySelector('#stopClock');
+    stopClock.addEventListener('click',() =>{
+        clearInterval(currentTimer);
+        og_min = sessionMins.textContent;
+        time.textContent = `${og_min}:00`
+        activeTimer = false;
+    })
 }
 
+
+
 function updateSession(min){
-    time.textContent = `${pad(min)}:00`;
+    if(!activeTimer){
+        time.textContent = `${pad(min)}:00`;
+    }
     sessionMins.textContent = min;
 }
 
