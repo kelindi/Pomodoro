@@ -9,6 +9,8 @@ window.onload = () => {
 function timer() {
     activeTimer = true;
     currentTimer = setInterval(() => {
+        if(defaultSession == 0)
+        
         if (seconds == 0) {
             defaultSession -= 1;
             seconds = 59;
@@ -18,7 +20,6 @@ function timer() {
             seconds -= 1
             time.textContent = `${pad(defaultSession)}:${pad(seconds)}`
         }
-
 
     }, 1000);
 }
@@ -48,7 +49,7 @@ function initBtns(){
     //init reduce session time button
     subSession = document.querySelector('#subSession');
     subSession.addEventListener('click',()=> {
-        if(defaultSession == 0 || activeTimer){
+        if(defaultSession == 1 || activeTimer){
             return
         }
 
@@ -67,7 +68,7 @@ function initBtns(){
     //init reduce break button
     subBreak = document.querySelector('#subBreak');
     subBreak.addEventListener('click',()=> {
-        if(defaultBreak == 0 || activeTimer){
+        if(defaultBreak == 1 || activeTimer){
             return
         }
         defaultBreak -= 1;
