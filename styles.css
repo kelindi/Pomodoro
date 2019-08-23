@@ -1,0 +1,35 @@
+#container{
+    width:400px;
+}
+
+
+
+
+#settings{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 400px;
+    background-color:wheat;
+
+}
+
+
+.center-me {
+    text-align: center;
+  }
+
+#session{
+    width:200px;
+}
+
+#break{
+    width:200px;
+}
+
+.setting{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around
+}

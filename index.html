@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 
-    <head>
-        <title>Pomodoro</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <p>HI</p>
-        <script src="main.js" async defer></script>
-    </body>
+<head>
+    <title>Pomodoro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="container">
+        <div class="center-me">Pomodoro Clock</div>
+        <div id="settings">
+            <div id="session">
+                <div class="center-me">Session</div>
+                <div class="setting">
+                    <button id="subSession">&#x25BC</button>
+                    <div id="sessionMins" class="notblock"></div>
+                    <button id="addSession">&#x25B2</button>
+                </div>
+            </div>
+            <div id="break">
+                <div class="center-me">Break</div>
+                <div class="setting">
+                    <button id="subBreak">&#x25BC</button>
+                    <div id="breakMins" class="notblock"></div>
+                    <button id="addBreak">&#x25B2</button>
+                </div>
+            </div>
+        </div>
+        <div id="topbuttons">
+            <button id ="start">Start</button>
+            <button id = "refresh">refresh</button>
+        </div>
+        <div id="status">status</div>
+        <div id="time">time</div>
+        <div id="bottombuttons">
+            <button id = "pause">pause</button>
+            <button id = "stopClock">StopClock</button>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script src="main.js" async defer>
+    </script>
+</body>
+
 </html>
