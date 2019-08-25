@@ -1,5 +1,5 @@
-let currentTimer, lastMin, lastSecond, status, defaultSession = 25, defaultBreak = 5, activeTimer = false;
-let seconds = 60, timerStarted = false;
+let currentTimer, lastMin, lastSecond, defaultSession = 25, defaultBreak = 5, activeTimer = false;
+let sessionSeconds = 0, timerStarted = false, breakSeconds = 0;
 window.onload = () => {
     //timer(25);
     initDisplays();
@@ -9,47 +9,66 @@ window.onload = () => {
 function timer() {
     activeTimer = true;
     currentTimer = setInterval(() => {
-        if(defaultSession == 0)
-        
-        if (seconds == 0) {
+        if (sessionSeconds == 0) {
             defaultSession -= 1;
-            seconds = 59;
-            time.textContent = `${pad(defaultSession)}:${pad(seconds)}`
+            sessionSeconds = 59;
+            time.textContent = `${pad(defaultSession)}:${pad(sessionSeconds)}`
         }
         else {
-            seconds -= 1
-            time.textContent = `${pad(defaultSession)}:${pad(seconds)}`
+            sessionSeconds -= 1
+            time.textContent = `${pad(defaultSession)}:${pad(sessionSeconds)}`
         }
 
     }, 1000);
 }
 
+function breakTimer() {
+    activeTimer = true;
+    currentTimer = setInterval(() => {
 
-function pauseTimer(){
+        if (breakSeconds == 0) {
+            defaultBreak -= 1;
+            breakSeconds = 59;
+            time.textContent = `${pad(defaultBreak)}:${pad(breakSeconds)}`
+        }
+        else {
+            breakSeconds -= 1
+            time.textContent = `${pad(defaultBreak)}:${pad(breakSeconds)}`
+        }
+    }, 1000);
+}
+
+
+
+function pauseTimer() {
     clearInterval(currentTimer);
-    lastMin = defaultSession;
-    lastSecond = seconds;
-    timerStarted =false;
+    if (stat.textContent == "Session") {
+        lastMin = defaultSession;
+        lastSecond = sessionSeconds;
+    }
+    else {
+        lastMin = defaultBreak;
+        lastSecond = breakSeconds;
+    }
+    timerStarted = false;
 };
 
-function stopTimer(){
-    clearInterval(current)
-}
-function initDisplays(){
+
+function initDisplays() {
     sessionMins = document.querySelector('#sessionMins')
     sessionMins.textContent = 25;
     breakMins = document.querySelector('#breakMins')
     breakMins.textContent = 5;
     time = document.querySelector("#time");
-    time.textContent = `25:00`
-    status = document.querySelector("#status")
-    status.textContent = "Session"
-}   
-function initBtns(){
+    time.textContent = `25:00`;
+    stat = document.querySelector("#status");
+    stat.textContent = "Session";
+}
+function initBtns() {
     //init reduce session time button
     subSession = document.querySelector('#subSession');
-    subSession.addEventListener('click',()=> {
-        if(defaultSession == 1 || activeTimer){
+    subSession.addEventListener('click', () => {
+        if (defaultSession == 1 || activeTimer) {
             return
         }
 
@@ -58,8 +77,8 @@ function initBtns(){
     })
     //init increase session time button
     addsession = document.querySelector('#addSession');
-    addSession.addEventListener('click',()=> {
-        if(activeTimer){
+    addSession.addEventListener('click', () => {
+        if (activeTimer) {
             return
         }
         defaultSession += 1;
@@ -67,8 +86,8 @@ function initBtns(){
     })
     //init reduce break button
     subBreak = document.querySelector('#subBreak');
-    subBreak.addEventListener('click',()=> {
-        if(defaultBreak == 1 || activeTimer){
+    subBreak.addEventListener('click', () => {
+        if (defaultBreak == 1 || activeTimer) {
             return
         }
         defaultBreak -= 1;
@@ -76,8 +95,8 @@ function initBtns(){
     })
     //init increase break button
     addBreak = document.querySelector('#addBreak');
-    addBreak.addEventListener('click',()=> {
-        if(activeTimer){
+    addBreak.addEventListener('click', () => {
+        if (activeTimer) {
             return
         }
         defaultBreak += 1;
@@ -86,43 +105,44 @@ function initBtns(){
 
     //init Start button
     start = document.querySelector('#start');
-    start.addEventListener('click',()=>{
-        if(!timerStarted){
+    start.addEventListener('click', () => {
+        if (!timerStarted) {
             timer();
         }
     })
-    
+
     //init pause button
     pause = document.querySelector('#pause');
-    pause.addEventListener('click',()=>{
+    pause.addEventListener('click', () => {
         pauseTimer();
     })
 
     //init refresh button
     refresh = document.querySelector('#refresh');
-    refresh.addEventListener('click',()=>{
+    refresh.addEventListener('click', () => {
         clearInterval(currentTimer);
         defaultBreak = 5;
         defaultSession = 25;
         time.textContent = '25:00'
-        breakMins.textContent = 25;
-        sessionMins.textContent = 5
+        breakMins.textContent = 5;
+        sessionMins.textContent = 25;
         activeTimer = false;
     })
     //init StopClock
     stopClock = document.querySelector('#stopClock');
-    stopClock.addEventListener('click',() =>{
+    stopClock.addEventListener('click', () => {
         clearInterval(currentTimer);
         og_min = sessionMins.textContent;
         time.textContent = `${og_min}:00`
         activeTimer = false;
+        stat.textContent == 'Session'
     })
 }
 
 
 
-function updateSession(min){
-    if(!activeTimer){
+function updateSession(min) {
+    if (!activeTimer) {
         time.textContent = `${pad(min)}:00`;
     }
     sessionMins.textContent = min;
@@ -131,6 +151,29 @@ function updateSession(min){
 
 
 function pad(number) {
+    // put this code in a function u call when the case is reached
+    if (defaultSession == -1 && sessionSeconds == 0 && stat.textContent == "Session") {
+        defaultSession = sessionMins.textContent;
+        sessionSeconds = 0;
+        clearInterval(currentTimer); 
+        breakTimer();
+    }
+    else if (defaultBreak == -1 && breakSeconds == 0 && stat.textContent == "Break") {
+        defaultBreak = breakMins.textContent;
+        breakSeconds = 0;
+        clearInterval(currentTimer);
+        timer();
+    }
+
     return (number < 10 ? '0' : '') + number
-  
+
+}
+
+function changeStatus() {
+    if (stat.textContent == "Session") {
+        stat.textContent = "Break";
+    }
+    else {
+        stat.textContent = "Session";
+    }
 }
