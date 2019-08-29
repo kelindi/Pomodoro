@@ -7,9 +7,13 @@ window.onload = () => {
 }
 
 function timer() {
+    stat.textContent = "Session";
     activeTimer = true;
     currentTimer = setInterval(() => {
-        if (sessionSeconds == 0) {
+        if(defaultSession == 0 && sessionSeconds == 0){
+            changeTimer();
+        }
+        else if (sessionSeconds == 0) {
             defaultSession -= 1;
             sessionSeconds = 59;
             time.textContent = `${pad(defaultSession)}:${pad(sessionSeconds)}`
@@ -20,13 +24,18 @@ function timer() {
         }
 
     }, 1000);
+    console.log('timer finished');
 }
 
 function breakTimer() {
+    stat.textContent = "Break";
     activeTimer = true;
     currentTimer = setInterval(() => {
-
-        if (breakSeconds == 0) {
+        if(defaultBreak == 0 && breakSeconds == 0){
+            changeTimer();
+        }
+        
+        else if (breakSeconds == 0) {
             defaultBreak -= 1;
             breakSeconds = 59;
             time.textContent = `${pad(defaultBreak)}:${pad(breakSeconds)}`
@@ -127,6 +136,7 @@ function initBtns() {
         breakMins.textContent = 5;
         sessionMins.textContent = 25;
         activeTimer = false;
+        stat.textContent = "Session";
     })
     //init StopClock
     stopClock = document.querySelector('#stopClock');
@@ -136,6 +146,7 @@ function initBtns() {
         time.textContent = `${og_min}:00`
         activeTimer = false;
         stat.textContent == 'Session'
+        
     })
 }
 
@@ -151,20 +162,6 @@ function updateSession(min) {
 
 
 function pad(number) {
-    // put this code in a function u call when the case is reached
-    if (defaultSession == -1 && sessionSeconds == 0 && stat.textContent == "Session") {
-        defaultSession = sessionMins.textContent;
-        sessionSeconds = 0;
-        clearInterval(currentTimer); 
-        breakTimer();
-    }
-    else if (defaultBreak == -1 && breakSeconds == 0 && stat.textContent == "Break") {
-        defaultBreak = breakMins.textContent;
-        breakSeconds = 0;
-        clearInterval(currentTimer);
-        timer();
-    }
-
     return (number < 10 ? '0' : '') + number
 
 }
@@ -175,5 +172,20 @@ function changeStatus() {
     }
     else {
         stat.textContent = "Session";
+    }
+}
+
+function changeTimer() {
+    if  (stat.textContent == "Session") {
+        defaultSession = sessionMins.textContent;
+        sessionSeconds = 0;
+        clearInterval(currentTimer);
+        breakTimer();
+    }
+    else if (stat.textContent == "Break") {
+        defaultBreak = breakMins.textContent;
+        breakSeconds = 0;
+        clearInterval(currentTimer);
+        timer();
     }
 }

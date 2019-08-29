@@ -1,35 +1,111 @@
-#container{
-    width:400px;
+body {
+    font-weight: 400px;
+    font-family: Arial;
+    color: #80BFFF;
 }
 
+body, html {
+    height: 90%;
+    display: grid;
+}
+.span { 
+    margin: auto;
+  }
+#container {
+    width: 800px;
+    background-color: #001f3f;
+    border-radius: 50px;
+}
 
+#title {
+    font: 100 70px Arial;
+    color: #80BFFF;
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
 
-
-#settings{
+#settings {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 400px;
-    background-color:wheat;
-
+    width: 800px;
+    color: #80BFFF;
 }
-
 
 .center-me {
     text-align: center;
-  }
-
-#session{
-    width:200px;
 }
 
-#break{
-    width:200px;
+#session {
+    width: 400px;
 }
 
-.setting{
+#break {
+    width: 400px;
+}
+
+.setting {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-around
+}
+
+#topbuttons{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#status{
+    text-align: center;
+    font-size: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#time{
+    text-align: center;
+    font-size: 70px;
+}
+#bottombuttons{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+}
+#pause{
+    margin-right: 100px;
+}
+#stopClock{
+    margin-left: 100px;
+}
+#status{
+    width: 200px;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    background-color: dimgray;
+    border: none;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button:hover {
+    color: #80BFFF;
+}
+
+button:active {
+    background-color: aliceblue;
 }
