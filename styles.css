@@ -2,6 +2,7 @@ body {
     font-weight: 400px;
     font-family: Arial;
     color: #80BFFF;
+    background-color: #99d8d0;
 }
 
 body, html {
@@ -20,11 +21,12 @@ body, html {
 #title {
     font: 100 70px Arial;
     color: #80BFFF;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     margin-top: 15px;
 }
 
 #settings {
+    margin-top: 15px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -34,6 +36,8 @@ body, html {
 
 .center-me {
     text-align: center;
+    font-size: 25px;
+    margin-bottom: 15px;
 }
 
 #session {
@@ -91,11 +95,13 @@ button {
     width: 50px;
     height: 50px;
     background-color: dimgray;
-    border: none;
+    border: 4px;
+    border-color: white;
     color: white;
     text-align: center;
     border-radius: 50%;
     font-size: 20px;
+
 }
 
 button:focus {
@@ -108,4 +114,21 @@ button:hover {
 
 button:active {
     background-color: aliceblue;
+}
+
+.arrow{
+    width: 30px;
+    height: 30px;
+    align-content: center;
+    vertical-align: center;
+    background-color: #001f3f;
+    
+}
+
+.mins{
+    font-size: 23px;
+}
+
+#time{
+    color: white;
 }

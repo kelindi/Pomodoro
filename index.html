@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Pomodoro</title>
+    <title>Pomodoro-Clock</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div id="container" class = "span">
         <div class="center-me" id = "title">POMODORO CLOCK</div>
+        <div style="background-color: aliceblue; height: 5px; width: 700px; margin:auto;"></div>
         <div id="settings">
             <div id="session">
-                <div class="center-me">Session</div>
+                <div class="center-me">SESSION</div>
                 <div class="setting">
-                    <button id="subSession">&#x25BC</button>
-                    <div id="sessionMins" class="notblock"></div>
-                    <button id="addSession">&#x25B2</button>
+                    <button id="subSession"class = "arrow">&#x25BC</button>
+                    <div id="sessionMins" class="mins"></div>
+                    <button id="addSession"class = "arrow">&#x25B2</button>
                 </div>
             </div>
             <div id="break">
-                <div class="center-me">Break</div>
+                <div class="center-me">BREAK</div>
                 <div class="setting">
-                    <button id="subBreak">&#x25BC</button>
-                    <div id="breakMins" class="notblock"></div>
-                    <button id="addBreak">&#x25B2</button>
+                    <button id="subBreak"class = "arrow">&#x25BC</button>
+                    <div id="breakMins" class="mins"></div>
+                    <button id="addBreak"class = "arrow">&#x25B2</button>
                 </div>
             </div>
         </div>

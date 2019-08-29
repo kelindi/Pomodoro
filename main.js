@@ -7,7 +7,7 @@ window.onload = () => {
 }
 
 function timer() {
-    stat.textContent = "Session";
+    stat.textContent = "SESSION";
     activeTimer = true;
     currentTimer = setInterval(() => {
         if(defaultSession == 0 && sessionSeconds == 0){
@@ -28,7 +28,7 @@ function timer() {
 }
 
 function breakTimer() {
-    stat.textContent = "Break";
+    stat.textContent = "BREAK";
     activeTimer = true;
     currentTimer = setInterval(() => {
         if(defaultBreak == 0 && breakSeconds == 0){
@@ -51,7 +51,7 @@ function breakTimer() {
 
 function pauseTimer() {
     clearInterval(currentTimer);
-    if (stat.textContent == "Session") {
+    if (stat.textContent == "SESSION") {
         lastMin = defaultSession;
         lastSecond = sessionSeconds;
     }
@@ -71,7 +71,7 @@ function initDisplays() {
     time = document.querySelector("#time");
     time.textContent = `25:00`;
     stat = document.querySelector("#status");
-    stat.textContent = "Session";
+    stat.textContent = "SESSION";
 }
 function initBtns() {
     //init reduce session time button
@@ -115,6 +115,9 @@ function initBtns() {
     //init Start button
     start = document.querySelector('#start');
     start.addEventListener('click', () => {
+        if (activeTimer) {
+            return
+        }
         if (!timerStarted) {
             timer();
         }
@@ -123,6 +126,7 @@ function initBtns() {
     //init pause button
     pause = document.querySelector('#pause');
     pause.addEventListener('click', () => {
+        activeTimer = false;
         pauseTimer();
     })
 
@@ -136,7 +140,7 @@ function initBtns() {
         breakMins.textContent = 5;
         sessionMins.textContent = 25;
         activeTimer = false;
-        stat.textContent = "Session";
+        stat.textContent = "SESSION";
     })
     //init StopClock
     stopClock = document.querySelector('#stopClock');
@@ -145,7 +149,7 @@ function initBtns() {
         og_min = sessionMins.textContent;
         time.textContent = `${og_min}:00`
         activeTimer = false;
-        stat.textContent == 'Session'
+        stat.textContent == 'SESSION'
         
     })
 }
@@ -167,22 +171,22 @@ function pad(number) {
 }
 
 function changeStatus() {
-    if (stat.textContent == "Session") {
-        stat.textContent = "Break";
+    if (stat.textContent == "SESSION") {
+        stat.textContent = "BREAK";
     }
     else {
-        stat.textContent = "Session";
+        stat.textContent = "SESSION";
     }
 }
 
 function changeTimer() {
-    if  (stat.textContent == "Session") {
+    if  (stat.textContent == "SESSION") {
         defaultSession = sessionMins.textContent;
         sessionSeconds = 0;
         clearInterval(currentTimer);
         breakTimer();
     }
-    else if (stat.textContent == "Break") {
+    else if (stat.textContent == "BREAK") {
         defaultBreak = breakMins.textContent;
         breakSeconds = 0;
         clearInterval(currentTimer);
