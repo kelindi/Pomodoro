@@ -1,4 +1,4 @@
-## Calculator
+## Pomodoro
 A Pomodoro Clock to follow the Pomodoro Technique for productivity.
 
 ## What I Learned
