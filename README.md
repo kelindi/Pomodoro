@@ -5,4 +5,4 @@ A Pomodoro Clock to follow the Pomodoro Technique for productivity.
 * The javascript setInterval() function
 * more flex box design tricks
 
-## Demo: [live page](https://shantorian.github.io/Pomodoro/)
+## Demo: [live page](https://kelindi.github.io/Pomodoro/)
