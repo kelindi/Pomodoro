@@ -1,4 +1,4 @@
-let currentTimer, lastMin, lastSecond, defaultSession = 25, defaultBreak = 5, activeTimer = false;
+let currentTimer, lastMin, lastSecond, defaultSession = 25, defaultBreak = 5, timerIsOn = false;
 let sessionSeconds = 0, timerStarted = false, breakSeconds = 0;
 window.onload = () => {
     //timer(25);
@@ -9,6 +9,7 @@ window.onload = () => {
 function timer() {
     stat.textContent = "SESSION";
     activeTimer = true;
+    timerIsOn = true;
     currentTimer = setInterval(() => {
         if(defaultSession == 0 && sessionSeconds == 0){
             changeTimer();
@@ -29,7 +30,7 @@ function timer() {
 
 function breakTimer() {
     stat.textContent = "BREAK";
-    activeTimer = true;
+    timerIsOn = true;
     currentTimer = setInterval(() => {
         if(defaultBreak == 0 && breakSeconds == 0){
             changeTimer();
@@ -115,7 +116,7 @@ function initBtns() {
     //init Start button
     start = document.querySelector('#start');
     start.addEventListener('click', () => {
-        if (activeTimer) {
+        if (timerIsOn) {
             return
         }
         if (!timerStarted) {
@@ -126,7 +127,7 @@ function initBtns() {
     //init pause button
     pause = document.querySelector('#pause');
     pause.addEventListener('click', () => {
-        activeTimer = false;
+        timerIsOn = false;
         pauseTimer();
     })
 
@@ -134,21 +135,24 @@ function initBtns() {
     refresh = document.querySelector('#refresh');
     refresh.addEventListener('click', () => {
         clearInterval(currentTimer);
+        sessionSeconds = 0;
         defaultBreak = 5;
         defaultSession = 25;
         time.textContent = '25:00'
         breakMins.textContent = 5;
         sessionMins.textContent = 25;
-        activeTimer = false;
+        timerIsOn = false;
         stat.textContent = "SESSION";
     })
     //init StopClock
     stopClock = document.querySelector('#stopClock');
     stopClock.addEventListener('click', () => {
+        activeTimer = false;
         clearInterval(currentTimer);
         og_min = sessionMins.textContent;
+        sessionSeconds = 0
         time.textContent = `${og_min}:00`
-        activeTimer = false;
+        timerIsOn = false;
         stat.textContent == 'SESSION'
         
     })
@@ -157,7 +161,7 @@ function initBtns() {
 
 
 function updateSession(min) {
-    if (!activeTimer) {
+    if (!timerIsOn) {
         time.textContent = `${pad(min)}:00`;
     }
     sessionMins.textContent = min;
