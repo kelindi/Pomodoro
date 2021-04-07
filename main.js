@@ -1,4 +1,4 @@
-let currentTimer, lastMin, lastSecond, defaultSession = 25, defaultBreak = 5, timerIsOn = false;
+let currentTimer, lastMin, lastSecond, defaultSession = 25, defaultBreak = 5, timerIsOn = false, activeTimer = false;
 let sessionSeconds = 0, timerStarted = false, breakSeconds = 0;
 window.onload = () => {
     //timer(25);
